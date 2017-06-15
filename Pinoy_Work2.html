@@ -2,8 +2,6 @@
     <head>
         <meta charset="utf-8">
         <title>Piony_Work</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
             <link rel=stylesheet type="text/css" href="work-2.css">
     </head>
     <body>
@@ -12,8 +10,8 @@
           <img src="img/top.png" id="pinoy">
           <div id="pull-right">
           <span v-if="data.currentUser"><img :src="data.currentUser.photoURL" alt="" width="30" height="30"></span>
-          <span v-if="data.currentUser" class="glyphicon glyphicon glyphicon-off" @click="logout()"></span>
-          <span v-else class="glyphicon glyphicon-user" @click="login()"></span>
+          <span v-if="data.currentUser"><img :src="data.currentUser.photoURL" @click="logout()"></span>
+          <span v-else><img :src="img/login.png" @click="login()"></span>
         </div>
       </div>
         <h3 id="subtitle">Workers' Experience in Taiwan !</h3>
