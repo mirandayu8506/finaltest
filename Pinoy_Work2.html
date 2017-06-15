@@ -96,21 +96,21 @@
             // ASN REQ 3 : merely singIn with fb here
             var provider = new firebase.auth.FacebookAuthProvider();
 
-            firebase.auth().signInWithPopup(provider).then(function(result) {
+            firebase.auth().signInWithPopup(provider).catch(errorCallback);
           // This gives you a Facebook Access Token. You can use it to access the Facebook API.
           // var token = result.credential.accessToken;
           // data.currentUser.photoURL=token;
           // // The signed-in user info.
           // var user = result.user;
           // // ...
-        }).catch(errorCallback);
+
 
         },
         logout : function (){
             // ASN REQ 3  : signOut here
             // Release favritesRef's value listener or just simply calling window.location.reload().
             firebase.auth().signOut().catch(errorCallback);
-            window.location.reload();
+            // window.location.reload();
         }
         },
 
