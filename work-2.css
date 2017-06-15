@@ -1,0 +1,51 @@
+body{
+    background-color: #F7F0DA;
+}
+#title{
+   background-color: #677F45;
+   width: 100%;
+}
+#pinoy{
+    width: 45%;
+    margin: 0.5em;
+}
+#post{
+    float: left;
+    width: 25%;
+    margin: 0.5em;
+}
+#login{
+    float: right;
+    width: 15%;
+    margin: 0.5em;
+}
+#subtitle{
+    text-align: center;
+    font-size: 1.5rem;
+    color: #73991F;
+}
+#bigDiv{
+    border: solid;
+    border-color: #677F45;
+    border-width: 5px;
+    background-color: e7f4ce;
+    display: block;
+}
+/*#bg{
+  width:100%;
+}*/
+.com{
+    display: inline;
+}
+
+.comTitle,.jobType,.startDay,.wage,.rent,.dayOff,.comment,.commentCon{
+    position: relative;
+    padding-left: 0%;
+}
+.wageRate,.rentRate,.dayOffRate,.subTime{
+    position: relative;
+    float:right;
+}
+.five{
+    font-size: 0.9em;
+}
