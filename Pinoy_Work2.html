@@ -2,18 +2,18 @@
     <head>
         <meta charset="utf-8">
         <title>Piony_Work</title>
-          <link rel=stylesheet type="text/css" href="work-2.css">
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+            <link rel=stylesheet type="text/css" href="work-2.css">
     </head>
     <body>
       <div id="title">
           <img src="img/post.png" id="post">
           <img src="img/top.png" id="pinoy">
-          <img src="img/login.png" @click="login()" id="login">
-          <img src="data.currentUser.photoURL" alt="" width="30" height="30">
-          <!-- <span v-if="data.currentUser" @click="logout()"><img :src="img/login.png"></span> -->
-          <span v-else  @click="logout()"><img :src="img/login.png"></span>
+          <div id="pull-right">
+          <span v-if="data.currentUser"><img :src="data.currentUser.photoURL" alt="" width="30" height="30"></span>
+          <span v-if="data.currentUser" class="glyphicon glyphicon glyphicon-off" @click="logout()"></span>
+          <span v-else class="glyphicon glyphicon-user" @click="login()"></span>
+        </div>
       </div>
         <h3 id="subtitle">Workers' Experience in Taiwan !</h3>
         <div id="bigDiv">
