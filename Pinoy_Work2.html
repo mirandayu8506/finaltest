@@ -10,8 +10,8 @@
       <div id="title">
           <img src="img/post.png" id="post">
           <img src="img/top.png" id="pinoy">
-          <span v-if="data.currentUser"><img src="img/login.png" @click="login()" id="login"></span>
-          <span v-if="data.currentUser"><img :src="data.currentUser.photoURL" alt="" width="30" height="30"></span>
+          <img src="img/login.png" @click="login()" id="login">
+          <img :src="data.currentUser.photoURL" alt="" width="30" height="30">
           <!-- <span v-if="data.currentUser" @click="logout()"><img :src="img/login.png"></span> -->
           <span v-else  @click="logout()"><img :src="img/login.png"></span>
       </div>
