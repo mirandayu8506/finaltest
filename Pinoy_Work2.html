@@ -2,24 +2,31 @@
     <head>
         <meta charset="utf-8">
         <title>Piony_Work</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
             <link rel=stylesheet type="text/css" href="work-2.css">
+            <link rel=stylesheet type="text/css" href="style.css">
     </head>
     <body>
       <div id="title">
           <img src="img/post.png" id="post">
           <img src="img/top.png" id="pinoy">
           <div id="pull-right">
-          <span v-if="data.currentUser"><img :src="data.currentUser.photoURL" alt="" width="30" height="30"></span>
-          <span v-if="data.currentUser"><img :src="data.currentUser.photoURL" @click="logout()"></span>
-          <span v-else><img :src="img/login.png" @click="login()"></span>
+          <button @click="login"  v-if="!data.currentUser">login</button>
+          <div v-if="data.currentUser" class="msg">
+            <img :src="data.currentUser.photoURL" width="50" height="50">
+          </div>
+
+
         </div>
       </div>
         <h3 id="subtitle">Workers' Experience in Taiwan !</h3>
         <div id="bigDiv">
 
           <div  v-for="i in user_id">
+            <div id="bigDiv">
             <p>
-            <span class="comTitle" name="comTitle">company:{{i.company}}</span>
+            <span class="comTitle" name="comTitle">Company:{{i.company}}</span>
             </p>
             <p>
             <span class="jobType" name="jobType">Job Category :<span class="job" name="job">{{i.jobType}}</span></span>
@@ -45,93 +52,89 @@
             <span class="comment">Comment:{{i.comment}}</span>
           </p>
           <p>
-            <time class="subTime">{{i.subTime}}</time>
+            <time class="subTime">{{i.submitTime}}</time>
           </p>
+          <br>
+        </div>
           <!-- <img src="img/backpic-01.png" id="bg"> -->
             <!--src="img/backpic-01.png" id="factory" -->
 
 
         </div>
-</div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+        <script>
+        // Initialize Firebase
+        var config = {
+
+        apiKey: "AIzaSyDMmPExrLZCOq1BdT86ky1TIdv1fLhPrEo",
+        authDomain: "pinoyworkexpsharing.firebaseapp.com",
+        databaseURL: "https://pinoyworkexpsharing.firebaseio.com",
+        projectId: "pinoyworkexpsharing",
+        storageBucket: "pinoyworkexpsharing.appspot.com",
+        messagingSenderId: "676999550287"
+      };
+      firebase.initializeApp(config);
+
+var db          = firebase.database() ;
+var rootRef     = db.ref() ;
+var postRef  = rootRef.child("posts") ;
+
+
+var errorCallback = function(error){ alert(error.message)}
+
+var vm = new Vue({
+
+    el:'#bigDiv',
+
+    data:{
+    currentUser : null,
+    user_id:{}
+  },
+
+  methods : {
+  login : function (){
+   var provider = new firebase.auth.FacebookAuthProvider();
+   firebase.auth().signInWithPopup(provider).catch(errorCallback)
+ },
+ logout : function (){
+   firebase.auth().signOut()
+ },
+},
+created: function(){
+  var vm=this;
+  postRef.once('value',function(data){
+  var allArticles = data.val()
+  vm.user_id = allArticles
+  })
+  firebase.auth().onAuthStateChanged(function(user) {
+
+  if (user){
+    var userData=user.toJSON();
+    vm.$set(vm.data,"currentUser",userData)
+  }else{
+    vm.$set(vm.data,"currentUser",null)
+  }
+  })
+}
+
+  })
+  // function checkJobType(){
+  //   $(".job").each(function(index,element){
+  //     if( $(element).text()=="factoryworker" ){
+  //       $("#bg").attr("src","img/top.png")
+  //
+  //     }else{
+  //       console.log("1")
+  //     }
+  //   })
+  // }
+  // checkJobType();
+  </script>
     </body>
 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
-            <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-            <script src="//connect.facebook.net/en_US/sdk.js"></script>
-            <script>
-            // Initialize Firebase
-            var config = {
 
-            apiKey: "AIzaSyDMmPExrLZCOq1BdT86ky1TIdv1fLhPrEo",
-            authDomain: "pinoyworkexpsharing.firebaseapp.com",
-            databaseURL: "https://pinoyworkexpsharing.firebaseio.com",
-            projectId: "pinoyworkexpsharing",
-            storageBucket: "pinoyworkexpsharing.appspot.com",
-            messagingSenderId: "676999550287"
-          };
-          firebase.initializeApp(config);
-
-    var db          = firebase.database() ;
-    var rootRef     = db.ref() ;
-    var postRef  = rootRef.child("posts") ;
-
-
-    var errorCallback = function(error){ alert(error.message)}
-
-    var vm = new Vue({
-
-        el:'#bigDiv',
-
-        data:{
-        currentUser : null,
-        user_id:{}
-      },
-
-      methods : {
-        login : function (){
-            // ASN REQ 3 : merely singIn with fb here
-            var provider = new firebase.auth.FacebookAuthProvider();
-
-            firebase.auth().signInWithPopup(provider).catch(errorCallback);
-          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-          // var token = result.credential.accessToken;
-          // data.currentUser.photoURL=token;
-          // // The signed-in user info.
-          // var user = result.user;
-          // // ...
-
-
-        },
-        logout : function (){
-            // ASN REQ 3  : signOut here
-            // Release favritesRef's value listener or just simply calling window.location.reload().
-            firebase.auth().signOut().catch(errorCallback);
-            // window.location.reload();
-        }
-        },
-
-    created: function(){
-      var vm=this;
-      postRef.once('value',function(data){
-      var allArticles = data.val()
-      vm.user_id = allArticles
-      })
-
-  }
-
-      })
-      // function checkJobType(){
-      //   $(".job").each(function(index,element){
-      //     if( $(element).text()=="factoryworker" ){
-      //       $("#bg").attr("src","img/top.png")
-      //
-      //     }else{
-      //       console.log("1")
-      //     }
-      //   })
-      // }
-      // checkJobType();
-      </script>
 </html>
