@@ -5,18 +5,18 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
             <link rel=stylesheet type="text/css" href="work-2.css">
-            <link rel=stylesheet type="text/css" href="style.css">
+
     </head>
     <body>
       <div id="bigDiv">
       <div id="title">
-          <img src="img/post.png" id="post">
+        <a target="_self" href="https://a46112006.github.io/final_web/Pinoy_Form"><img src="img/post.png" id="post"></a>
           <img src="img/top.png" id="pinoy">
-          <div id="pull-right">
+
           <img src="img/login.png" id="login" @click="login">
           <div v-if="this.currentUser" class="msg">
-            <img src="this.currentUser.photoURL" id="login" width="50" height="50">
-          </div>
+            <img src="this.currentUser.photoURL" @click="logout" id="login" width="50" height="50">
+
 
 
         </div>
