@@ -21,11 +21,7 @@ body{
     width: 13%;
     margin: 0.5em;
 }
-#log{
-  float: right;
-  
-  margin: 0.5em;
-}
+
 #subtitle{
     text-align: center;
     font-size: 1.5em;
