@@ -8,7 +8,7 @@
             <link rel=stylesheet type="text/css" href="style.css">
     </head>
     <body>
-      <div id="bigDiv1">
+      <div id="bigDiv">
       <div id="title">
           <img src="img/post.png" id="post">
           <img src="img/top.png" id="pinoy">
@@ -17,7 +17,7 @@
           <div v-if="this.currentUser" class="msg">
             <img :src="this.currentUser.photoURL" width="50" height="50">
           </div>
-
+          <span v-else  @click="logout()"><img :src="img/login.png"></span>
 
         </div>
       </div>
@@ -25,7 +25,7 @@
 
 
           <div  v-for="i in user_id">
-            <div id="bigDiv">
+            <div id="smallDiv">
             <p>
             <span class="comTitle" name="comTitle">Company:{{i.company}}</span>
             </p>
@@ -90,7 +90,7 @@ var provider = new firebase.auth.FacebookAuthProvider();
 
 var vm = new Vue({
 
-    el:'#bigDiv1',
+    el:'#bigDiv',
 
     data:{
     currentUser : null,
