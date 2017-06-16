@@ -8,20 +8,21 @@
             <link rel=stylesheet type="text/css" href="style.css">
     </head>
     <body>
+      <div id="bigDiv1">
       <div id="title">
           <img src="img/post.png" id="post">
           <img src="img/top.png" id="pinoy">
           <div id="pull-right">
-          <button @click="login"  v-if="!data.currentUser">login</button>
-          <div v-if="data.currentUser" class="msg">
-            <img :src="data.currentUser.photoURL" width="50" height="50">
+          <button @click="login">login</button>
+          <div v-if="this.currentUser" class="msg">
+            <img :src="this.currentUser.photoURL" width="50" height="50">
           </div>
 
 
         </div>
       </div>
         <h3 id="subtitle">Workers' Experience in Taiwan !</h3>
-        <div id="bigDiv">
+
 
           <div  v-for="i in user_id">
             <div id="bigDiv">
@@ -85,10 +86,11 @@ var postRef  = rootRef.child("posts") ;
 
 
 var errorCallback = function(error){ alert(error.message)}
+var provider = new firebase.auth.FacebookAuthProvider();
 
 var vm = new Vue({
 
-    el:'#bigDiv',
+    el:'#bigDiv1',
 
     data:{
     currentUser : null,
@@ -97,8 +99,9 @@ var vm = new Vue({
 
   methods : {
   login : function (){
-   var provider = new firebase.auth.FacebookAuthProvider();
-   firebase.auth().signInWithPopup(provider).catch(errorCallback)
+   firebase.auth().signInWithPopup(provider).then(function(result){
+     console.log("login");
+   }).catch(errorCallback)
  },
  logout : function (){
    firebase.auth().signOut()
@@ -116,7 +119,7 @@ created: function(){
     var userData=user.toJSON();
     vm.$set(vm.data,"currentUser",userData)
   }else{
-    vm.$set(vm.data,"currentUser",null)
+    // vm.$set(vm.data,"currentUser",null)
   }
   })
 }
