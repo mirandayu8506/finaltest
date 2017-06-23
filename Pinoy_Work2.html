@@ -102,15 +102,7 @@ var vm = new Vue({
    firebase.auth().signInWithPopup(provider).then(function(result){
      console.log("login");
      var token = result.credential.accessToken;
-     var credential = firebase.auth.FacebookAuthProvider.credential(
-    token);
-    // Sign in with the credential from the Facebook user.
-    firebase.auth().signInWithCredential(credential).then(function(user){
-
-    console.log("It looks like we signed into Firebase with the Facebook token correctly.");
-
-},
-     
+    
      // The signed-in user info.
      var user = result.user;
    }).catch(errorCallback)
@@ -119,20 +111,7 @@ var vm = new Vue({
    firebase.auth().signOut()
  },
 },
-  CordovaFacebook.graphRequest({
-    path: '/me',
-    params: { fields: 'picture.width(200).height(200)' },
-    onSuccess: function (userData) {
-        console.log(userData)
-        var profile_picture = userData.picture.data.url;
-
-            // Enter user details into the Firebase database:
-            firebase.database().ref('users/' + uid).set({
-            
-            profile_picture : profile_picture
-        });
-        console.log("Facebook user data should now be in the database!");   
-    },
+  
 created: function(){
   var vm=this;
   postRef.once('value',function(data){
