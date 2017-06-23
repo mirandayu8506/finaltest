@@ -14,8 +14,8 @@
           <img src="img/top.png" id="pinoy">
 
           <img src="img/login.png" id="login" @click="login">
-          <div v-if="this.currentUser" class="msg">
-            <img :src="this.currentUser.photoURL" @click="logout" id="login" width="50" height="50">
+          <div v-if="this.data.currentUser" class="msg">
+            <img :src="this.data.currentUser.photoURL" @click="logout" id="login" width="50" height="50">
 
 
 
@@ -102,7 +102,7 @@ var vm = new Vue({
    firebase.auth().signInWithPopup(provider).then(function(result){
      console.log("login");
      var token = result.credential.accessToken;
-     this.currentUser.photoURL=token;
+     this.data.currentUser.photoURL=token;
      // The signed-in user info.
      var user = result.user;
    }).catch(errorCallback)
